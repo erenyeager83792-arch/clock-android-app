@@ -1,0 +1,3 @@
+pyandroid-dev
+pyjnius
+buildozer
