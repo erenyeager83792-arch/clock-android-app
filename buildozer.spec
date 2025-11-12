@@ -52,6 +52,10 @@ android.copy_libs = 1
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 android.archs = arm64-v8a,armeabi-v7a
 
+# Explicitly set SDK path and build-tools version for CI reliability
+android.sdk_path = $ANDROID_SDK_ROOT
+android.build_tools_version = 33.0.0
+
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
