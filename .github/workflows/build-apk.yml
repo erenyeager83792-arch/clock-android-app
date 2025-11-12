@@ -88,7 +88,13 @@ jobs:
       
       - name: Install Android SDK packages
         run: |
-          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "ndk;25.2.9519653"
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "build-tools;30.0.3" "build-tools;29.0.2" "ndk;25.2.9519653"
+      
+      - name: Set Android SDK environment variables
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+          echo "ANDROID_SDK_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/25.2.9519653" >> $GITHUB_ENV
       
       - name: Cache Buildozer directory
         uses: actions/cache@v3
@@ -103,10 +109,6 @@ jobs:
       - name: Build APK with Buildozer
         run: |
           buildozer android debug
-        env:
-          ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
-          ANDROID_SDK_ROOT: ${{ env.ANDROID_SDK_ROOT }}
-          ANDROID_NDK_HOME: ${{ env.ANDROID_SDK_ROOT }}/ndk/25.2.9519653
       
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
