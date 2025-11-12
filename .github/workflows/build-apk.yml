@@ -82,13 +82,16 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
       
-      - name: Accept Android SDK licenses
+      - name: Install Android SDK packages
+        run: |
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;30.0.3" "build-tools;33.0.0" "ndk;25.2.9519653"
+      
+      - name: Accept SDK licenses
         run: |
           yes | sdkmanager --licenses || true
       
-      - name: Install Android SDK packages
-        run: |
-          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0" "build-tools;30.0.3" "build-tools;29.0.2" "ndk;25.2.9519653"
+      - name: Accept licenses again
+        run: yes | sdkmanager --licenses || true
       
       - name: Set Android SDK environment variables
         run: |
